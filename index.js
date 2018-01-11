@@ -15,8 +15,7 @@ app.use((req, res, next) => {
 
 
 app.get('/', (request, response) => {
-    response.send({})
-    // response.render('index');
+  response.render('index');
 });
 
 function serialize(obj) {
