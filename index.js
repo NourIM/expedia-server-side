@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const request = require('request');
 
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 function serialize(obj) {
   var str = [];
@@ -17,6 +18,7 @@ function serialize(obj) {
 }
 
 app.post('/search', (req, res) => {
+  console.log('body', req.body)
   let params = serialize(req.body);
   request(`https://offersvc.expedia.com/offers/v2/getOffers?scenario=deal-finder&page=foo&uid=foo&productType=Hotel&${params}`, (error, response, body) => {
     if (!error) {
