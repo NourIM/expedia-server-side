@@ -8,7 +8,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.get('/', (request, response) => {
-  response.render('app/index');
+  response.render('index');
 });
 
 function serialize(obj) {
