@@ -34,11 +34,12 @@ app.post('/search', (req, res) => {
 
 app.set('port', (process.env.PORT || 3000));
 
-app.use(express.static(__dirname + 'app'));
+app.use(express.static(__dirname + '/app'));
 
 // views is directory for all template files
-app.set('app', __dirname + 'app');
-app.set('app engine', 'ejs'); // for rendering HTML
+app.set('app', __dirname + '/app');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
