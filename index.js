@@ -5,9 +5,9 @@ const request = require('request');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false}));
 
-app.get('/', (request, response) => {
-  response.render('public/index');
-});
+// app.get('/', (request, response) => {
+//   response.render('public/index');
+// });
 
 function serialize(obj) {
   var str = [];
@@ -32,12 +32,20 @@ app.post('/search', (req, res) => {
 
 app.set('port', (process.env.PORT || 3000));
 
-app.use(express.static(__dirname + '/public'));
-app.set('views', __dirname + '/public')
-// views is directory for all template files
-app.set('app', __dirname + '/public');
-app.set('app engine', 'ejs'); // for rendering HTML
-app.engine('ejs', ejs.renderFile);
+app.use(express.static(__dirname + '/client'));
+app.set('views', __dirname + '/client');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.get('/', function (req, res) {
+  res.render('index.html')
+});
+
+// app.use(express.static(__dirname + '/public'));
+// app.set('views', __dirname + '/public')
+// // views is directory for all template files
+// app.set('app', __dirname + '/public');
+// app.set('app engine', 'ejs'); // for rendering HTML
+// app.engine('ejs', ejs.renderFile);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
