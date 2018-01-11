@@ -3,9 +3,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 
 var app = express();
-
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({ extended: false}));
 
 app.get('/', (request, response) => {
   response.render('public/index');
@@ -35,10 +33,11 @@ app.post('/search', (req, res) => {
 app.set('port', (process.env.PORT || 3000));
 
 app.use(express.static(__dirname + '/public'));
-
+app.set('views', __dirname + '/public')
 // views is directory for all template files
 app.set('app', __dirname + '/public');
 app.set('app engine', 'ejs'); // for rendering HTML
+app.engine('ejs', ejs.renderFile);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
