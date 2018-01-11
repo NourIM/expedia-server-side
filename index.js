@@ -34,10 +34,10 @@ app.post('/search', (req, res) => {
 
 app.set('port', (process.env.PORT || 3000));
 
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + 'app'));
 
 // views is directory for all template files
-app.set('app', __dirname + '/app');
+app.set('app', __dirname + 'app');
 app.set('app engine', 'ejs'); // for rendering HTML
 
 app.listen(app.get('port'), function() {
