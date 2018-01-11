@@ -8,7 +8,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.get('/', (request, response) => {
-  response.render('index');
+  response.render('public/index');
 });
 
 function serialize(obj) {
@@ -34,12 +34,11 @@ app.post('/search', (req, res) => {
 
 app.set('port', (process.env.PORT || 3000));
 
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
-app.set('app', __dirname + '/app');
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.set('app', __dirname + '/public');
+app.set('app engine', 'ejs'); // for rendering HTML
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
